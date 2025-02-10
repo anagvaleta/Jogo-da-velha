@@ -26,3 +26,11 @@ altera o comportamento do this, o que a torna ideal para funções curtas e call
 ✔ Ótimas para callbacks e funções curtas (map, filter, reduce).
 !! Não devem ser usadas como métodos de objetos ou constructor (new). 
 */
+
+/* (prev) => { ... }?
+O React pode agrupar múltiplas atualizações de estado, e se tentarmos atualizar diretamente sem essa abordagem, pode haver problemas com valores desatualizados.
+1️. Garantir que estamos usando o valor mais atualizado do estado
+2️. Útil quando a atualização depende do estado anterior
+
+Se a atualização precisar modificar o estado anterior, o prev garante que estamos trabalhando com a versão mais recente do estado.
+*/

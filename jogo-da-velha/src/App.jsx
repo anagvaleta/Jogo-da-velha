@@ -17,18 +17,18 @@ import './styles.css';
 
 const winningCombinations = [
   //horizontais
-  [0,1,2],
-  [3,4,5],
-  [6,7,8],
+  {indexes:[0,1,2], orientation: 'horizontal'},
+  {indexes:[3,4,5], orientation: 'horizontal'},
+  {indexes:[6,7,8], orientation: 'horizontal'},
 
   //verticas
-  [0,3,6],
-  [1,4,7],
-  [2,5,8],
+  {indexes:[0,3,6], orientation: 'vertical'},
+  {indexes:[1,4,7], orientation: 'vertical'},
+  {indexes:[2,5,8], orientation: 'vertical'},
 
  //diagonais
-  [2,4,6],
-  [0,4,8],
+  {indexes:[2,4,6], orientation: 'diagonal-1'},
+  {indexes:[0,4,8], orientation: 'diagonal-2'},
 ];
 
 
@@ -46,6 +46,9 @@ function App() {
     if (gameData[clickedIndex] !==0) {
       return;
     }
+    if (winningCombo) {
+      return;
+    }
 
     setGameData((prev) => {
       const newGameData = [...prev];
@@ -58,23 +61,40 @@ function App() {
 
   useEffect(()=> {
     checkWinner ();
-  }, [gameData])
+    checkGameEnded();
+  }, [gameData]);
+
+  useEffect(() => {
+    if(winningCombo){
+      alert('Parabéns, você ganhou!');
+    }
+  }, [winningCombo]);
+
+  const checkGameEnded = () => {
+    if(gameData.every((item) => item !==0)) {
+      alert('Fim de jogo')
+    };
+  }
 
   const checkWinner = () => {
     console.log('checking winner')
     let winner = null;
 
-    for (let values of winningCombinations) {
-
-      if(gameData[values[0]]===1 && 
-        gameData[values[1]]===1 && 
-        gameData[values[2]]===1){
+    for (let combination of winningCombinations) {
+      const {indexes} = combination;
+      if(gameData[indexes[0]]===1 && 
+        gameData[indexes[1]]===1 && 
+        gameData[indexes[2]]===1){
           winner = 'player 1';
       }
-      if(gameData[values[0]]===2 && 
-        gameData[values[1]]===2 && 
-        gameData[values[2]]===2){
+      if(gameData[indexes[0]]===2 && 
+        gameData[indexes[1]]===2 && 
+        gameData[indexes[2]]===2){
           winner = 'player 2';
+      }
+      if(winner){
+        setWinningCombo(combination);
+        break;
       }
     }
 
@@ -89,6 +109,7 @@ function App() {
       {gameData.map ((value, index) =>
         (<span onClick={() => {handleClick(index)}}
         key={index}
+        className={winningCombo?.indexes.includes(index) ? winningCombo.orientation: null}
         >
           {value === 1 && '❌'}
           {value === 2 && '⭕'}
