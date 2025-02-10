@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  html,
+  body {
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .board-game {
+    /*definindo o tamanho do tabuleiro e a cor do fundo */
+    width: 400px; 
+    height: 400px;
+    background: white;
+  
+    display: flex;  /* organizar os elementos internos */
+    flex-wrap: wrap; /* permitir a quebra de linha pros itens ficarem dentro do tabuleiro */
+    justify-content: center; 
+  
+    span {
+      width: 33.33333%; /* cada célula ocupa 1/3 do tabuleiro, pq o jogo eh uma grade 3x3 */
+      display: flex; 
+      align-items: center;
+      justify-content: center;
+      color: #333;
+      font-size: 30px;
+      position: relative; /* posição relativa para poder adicionar pseudo-elementos depois (::after) */
+      outline: 1px solid #ccc;
+  
+      /*O & permite que você referencie o próprio seletor pai dentro de um bloco aninhado, sem precisar reescrevê-lo completamente. */
+      &:hover {
+        background: #f6f6f6;
+        cursor: pointer;
+      }
+  
+      /* linhas de vitória */
+      &::after {
+        content: '';
+        display: none;
+        width: 180%;
+        height: 10px;
+        background: black;
+        position: absolute;
+        z-index: 100;
+      }
+  
+      &.horizontal {
+        &::after {
+          display: block;
+        }
+      }
+      &.vertical {
+        &::after {
+          display: block;
+          rotate: 90deg;
+        }
+      }
+      &.diagonal-1 {
+        &::after {
+          display: block;
+          rotate: 45deg;
+        }
+      }
+      &.diagonal-2 {
+        &::after {
+          display: block;
+          rotate: 135deg;
+        }
+      }
+  
+      /* texto pequeno dentro da celula */
+      abbr {
+        font-size: 20px;
+        color: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+    }
+  }

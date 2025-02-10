@@ -1,0 +1,28 @@
+/* O .map() é um método de arrays no JavaScript que permite percorrer um array e transformar seus elementos, retornando um novo array modificado.
+
+const novoArray = arrayOriginal.map((elemento, indice, array) => {
+  return transformação;
+});
+
+elemento → cada item do array.
+indice → a posição do elemento no array (opcional).
+array → o próprio array original (opcional).
+Retorna um novo array sem modificar o original
+
+✔ Não altera o array original.
+✔ Muito usado em React para renderizar listas.
+✔ Diferente do .forEach(), pois retorna um novo array. 
+*/
+
+//O useState é um hook do React que permite que você adicione estado a um componente funcional.
+
+/* 
+Uma Arrow Function é uma forma mais curta e moderna de escrever funções em JavaScript, introduzida no ES6 (ECMAScript 2015). Ela tem uma sintaxe reduzida e não 
+altera o comportamento do this, o que a torna ideal para funções curtas e callbacks.
+
+✔ Arrow functions (=>) são funções mais curtas e modernas.
+✔ Permitem retorno implícito (sem return e {}).
+✔ Mantêm o this do contexto onde foram criadas.
+✔ Ótimas para callbacks e funções curtas (map, filter, reduce).
+!! Não devem ser usadas como métodos de objetos ou constructor (new). 
+*/
